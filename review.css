@@ -1405,3 +1405,60 @@ body {
     font-size: 1.8rem;
   }
 }
+
+/* ヘッダーナビ：はみ出し防止（アイコンのみ表示に切り替え） */
+@media (max-width: 640px) {
+  .header-inner {
+    gap: 8px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .header-nav {
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .nav-link-text {
+    display: none;
+  }
+
+  .nav-icon {
+    font-size: 1.1rem;
+  }
+}
+
+/* 商品バナー：長い商品名でも崩れないように縦積みに */
+@media (max-width: 640px) {
+  .product-banner {
+    top: 56px;
+  }
+
+  .product-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .product-info {
+    width: 100%;
+  }
+
+  .product-name {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  .product-change-btn {
+    align-self: flex-end;
+    font-size: 0.78rem;
+  }
+}

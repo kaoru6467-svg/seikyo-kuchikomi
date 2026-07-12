@@ -31,12 +31,12 @@ const PRODUCTS = [
     name:  '好烏龍 パイン&ライチティーエード',
     sub:   'ウーロン茶ベース、パイナップル&ライチの香る果汁12%',
     emoji: '🍍',
-    image: 'product_pinelychee.jpg',
+    image: 'product_pinelychee.png',
     color: '#F2A649',    // アクセント（南国オレンジ）
     theme: 'orange',
     tag:   '🛍️ 南国気分',
     ribbonText: 'シール投票中',
-    imgZoom: 1.9,
+    imgZoom: 1.25,
   },
   {
     id:    'product-c',

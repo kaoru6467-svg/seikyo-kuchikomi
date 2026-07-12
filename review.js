@@ -1,6 +1,6 @@
 /* ============================================
    あつまれみんなの正直レビュー — review.js
-   v5: 南国の売店おやつレビュー（あつ森風パステルデザイン）
+   v5: 南国の売店ドリンクレビュー（あつ森風パステルデザイン）
    ============================================ */
 
 // ============================================
@@ -18,7 +18,7 @@ const PRODUCTS = [
     name:  'クラフトボス フルーツティーエード ピーチ&マンゴー',
     sub:   'もも・りんご・マンゴーの果汁入り、爽やかな甘さのフルーツティー',
     emoji: '🍑',
-    image: 'product_peachmango.png',
+    image: 'images/product_peachmango.png',
     color: '#FF7B8A',    // アクセント（花）
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
@@ -29,7 +29,7 @@ const PRODUCTS = [
     name:  '好烏龍 パイン&ライチティーエード',
     sub:   'ウーロン茶ベース、パイナップル&ライチの香る果汁12%',
     emoji: '🍍',
-    image: 'product_pinelychee.jpg',
+    image: 'images/product_pinelychee.jpg',
     color: '#F2A649',    // アクセント（南国オレンジ）
     theme: 'orange',
     tag:   '🛍️ 南国気分',
@@ -288,7 +288,7 @@ function getDummyReviews() {
       id: 'dummy-1',
       productId: 'product-a',
       feeling: 'like',
-      text: '思ったより甘さ控えめで食べやすかったです！モチモチ感もしっかりして、お茶と一緒にパクっと食べるのにぴったりでした🍵',
+      text: '思ったより甘さ控えめで飲みやすかったです！マンゴーの香りがしっかりして、休み時間にゴクゴク飲むのにぴったりでした🍑',
       nickname: 'お茶大2年生🌸',
       date: '2026-07-01'
     },
@@ -296,7 +296,7 @@ function getDummyReviews() {
       id: 'dummy-2',
       productId: 'product-a',
       feeling: 'neutral',
-      text: '味は美味しいけど、タレがたっぷりでちょっとこぼれやすいかも。ウェットティッシュがあると安心！',
+      text: '味は美味しいけど、甘さがちょっと強めかも。がっつり甘いのが好きな人には最高だと思う！',
       nickname: '甘党な1年生',
       date: '2026-06-30'
     },
@@ -304,15 +304,15 @@ function getDummyReviews() {
       id: 'dummy-3',
       productId: 'product-b',
       feeling: 'like',
-      text: 'ぷるぷるの食感がたまらない！黒蜜もコクがあって、さっぱり食べやすい夏のおやつだと思います。',
-      nickname: '和菓子好き',
+      text: 'ウーロン茶のさっぱり感とライチの甘さのバランスが絶妙！南国気分になれる夏にぴったりの一本だと思います。',
+      nickname: 'お茶好き',
       date: '2026-06-29'
     },
     {
       id: 'dummy-4',
       productId: 'product-b',
       feeling: 'dislike',
-      text: '私には黒蜜がちょっと甘すぎました。甘みが強いのが好きな人や、テスト勉強で疲れて頭を使ったときのご褒美にぴったり！',
+      text: '私にはパインの香りがちょっと強く感じました。フルーティーな香りが好きな人や、気分転換したいときにぴったり！',
       nickname: 'さっぱり党',
       date: '2026-06-28'
     }

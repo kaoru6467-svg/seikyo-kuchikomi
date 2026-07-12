@@ -18,7 +18,7 @@ const PRODUCTS = [
     name:  'クラフトボス フルーツティーエード ピーチ&マンゴー',
     sub:   'もも・りんご・マンゴーの果汁入り、爽やかな甘さのフルーツティー',
     emoji: '🍑',
-    image: 'images/product_peachmango.png',
+    image: 'product_peachmango.png',
     color: '#FF7B8A',    // アクセント（花）
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
@@ -29,7 +29,7 @@ const PRODUCTS = [
     name:  '好烏龍 パイン&ライチティーエード',
     sub:   'ウーロン茶ベース、パイナップル&ライチの香る果汁12%',
     emoji: '🍍',
-    image: 'images/product_pinelychee.jpg',
+    image: 'product_pinelychee.jpg',
     color: '#F2A649',    // アクセント（南国オレンジ）
     theme: 'orange',
     tag:   '🛍️ 南国気分',

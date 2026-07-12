@@ -23,7 +23,7 @@ const PRODUCTS = [
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
     ribbonText: 'シール投票中',
-    imgZoom: 1.2,
+    imgZoom: 1.0,
   },
   {
     id:    'product-b',
@@ -36,7 +36,7 @@ const PRODUCTS = [
     theme: 'orange',
     tag:   '🛍️ 南国気分',
     ribbonText: 'シール投票中',
-    imgZoom: 1.25,
+    imgZoom: 1.0,
   },
   {
     id:    'product-c',

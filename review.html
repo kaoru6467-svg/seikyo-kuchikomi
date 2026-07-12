@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>あつまれみんなの正直レビュー | 生協口コミページ</title>
+  <meta name="description" content="学生生協の新商品おやつについて、みんなの正直な口コミを集めるページです。商品を選んでレビューを投稿してみよう！" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700;800;900&family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="review.css" />
+</head>
+<body>
+
+  <!-- 固定背景に散りばめられた南国モチーフの手描き風アイコン/絵文字 -->
+  <div class="bg-scatter" style="top: 10%; left: 5%;">🌿</div>
+  <div class="bg-scatter" style="top: 30%; right: 6%;">🐚</div>
+  <div class="bg-scatter" style="top: 45%; left: 8%;">🌺</div>
+  <div class="bg-scatter" style="top: 65%; right: 7%;">🌿</div>
+  <div class="bg-scatter" style="top: 80%; left: 4%;">🐚</div>
+  <div class="bg-scatter" style="top: 20%; right: 28%;">⭐</div>
+  <div class="bg-scatter" style="top: 55%; left: 35%;">🍍</div>
+  <div class="bg-scatter" style="top: 75%; left: 25%;">🥥</div>
+  <div class="bg-scatter" style="top: 88%; right: 20%;">🌺</div>
+
+  <!-- ヘッダー -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <button class="header-logo" id="header-logo-btn" aria-label="商品選択に戻る">
+        <span class="logo-icon">🛒</span>
+        <span class="logo-text">生協口コミ</span>
+      </button>
+      <nav class="header-nav" id="header-nav" style="display:none;">
+        <button class="nav-link" id="back-to-select-btn">← お店に戻る</button>
+        <a href="#form-section" class="nav-link nav-link--cta" id="write-review-btn">🍉 レビューを書く</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== 画面①：商品選択画面 ===== -->
+  <div id="product-select-screen">
+
+    <!-- 選択画面ヒーロー -->
+    <section class="select-hero">
+      <div class="select-hero-inner">
+        <!-- 木製看板調 -->
+        <div class="wooden-sign">
+          <div class="wooden-sign-inner">
+            <div class="wooden-sign-logo">🌺</div>
+            <h1 class="select-hero-title">
+              あつまれ<span class="title-colorful"><span class="c-mi">み</span><span class="c-n">ん</span><span class="c-na">な</span><span class="c-no">の</span></span>正直レビュー
+            </h1>
+            <p class="select-hero-desc">
+              南国の売店へようこそ！お菓子の感想をみんなで交換しよう🌴<br>
+              まずは、レビューしたいおやつを選んでね♪
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 商品グリッド -->
+    <section class="product-select-section">
+      <div class="product-select-wrap">
+        <div class="section-head">
+          <div class="section-badge">🛍️ 売店のおやつ</div>
+          <h2 class="section-title">どのおやつを食べた？</h2>
+          <p class="section-sub">おやつをタップして選んでね！</p>
+        </div>
+        <div class="product-grid" id="product-grid">
+          <!-- JSで生成 -->
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /#product-select-screen -->
+
+
+  <!-- ===== 画面②：レビュー画面（商品選択後） ===== -->
+  <div id="review-screen" style="display:none;">
+
+    <!-- ヒーローセクション -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <!-- 木製看板調 -->
+        <div class="wooden-sign">
+          <div class="wooden-sign-inner">
+            <div class="wooden-sign-logo">🌺</div>
+            <h2 class="hero-title" id="review-hero-title">
+              あつまれ<span class="title-colorful"><span class="c-mi">み</span><span class="c-n">ん</span><span class="c-na">な</span><span class="c-no">の</span></span>正直レビュー
+            </h2>
+            <p class="hero-desc">
+              おやつの正直な感想を教えてね🌴<br />
+              苦手なものも大歓迎！どんな人に合いそうかも教えてくれると嬉しいな♪
+            </p>
+            <div class="hero-actions">
+              <a href="#form-section" class="btn btn--primary" id="hero-form-btn">
+                <span>🍉</span> レビューを書く
+              </a>
+              <a href="#reviews-section" class="btn btn--secondary" id="hero-reviews-btn">
+                <span>🌺</span> みんなのレビュー
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 商品情報バナー -->
+    <div class="product-banner" id="product-banner">
+      <div class="product-banner-inner">
+        <div class="product-info">
+          <span class="product-label" id="active-product-badge">商品A</span>
+          <span class="product-name" id="product-name-display">—</span>
+        </div>
+        <button class="product-change-btn" id="product-change-btn">おやつを選び直す ›</button>
+      </div>
+    </div>
+
+    <!-- レビュー一覧セクション -->
+    <section class="reviews-section" id="reviews-section">
+      <div class="section-wrap">
+        <div class="section-head">
+          <div class="section-badge">💬 みんなの声</div>
+          <h2 class="section-title" id="reviews-section-title">みんなの正直レビュー</h2>
+          <p class="section-sub">みんなの本音、チェックしてね！</p>
+        </div>
+
+        <!-- フィルター -->
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all" id="filter-all">すべて</button>
+          <button class="filter-btn" data-filter="like" id="filter-like">🍍 好き</button>
+          <button class="filter-btn" data-filter="neutral" id="filter-neutral">🥥 普通</button>
+          <button class="filter-btn" data-filter="dislike" id="filter-dislike">🌿 苦手</button>
+        </div>
+
+        <!-- 統計バー -->
+        <div class="stats-card" id="stats-card">
+          <div class="stats-item">
+            <span class="stats-num" id="stat-total">0</span>
+            <span class="stats-label">総レビュー数</span>
+          </div>
+          <div class="stats-divider"></div>
+          <div class="stats-item">
+            <span class="stats-num stats-like" id="stat-like">0%</span>
+            <span class="stats-label">🍍 好き</span>
+          </div>
+          <div class="stats-divider"></div>
+          <div class="stats-item">
+            <span class="stats-num stats-neutral" id="stat-neutral">0%</span>
+            <span class="stats-label">🥥 普通</span>
+          </div>
+          <div class="stats-divider"></div>
+          <div class="stats-item">
+            <span class="stats-num stats-dislike" id="stat-dislike">0%</span>
+            <span class="stats-label">🌿 苦手</span>
+          </div>
+        </div>
+
+        <!-- ローディング表示 -->
+        <div class="reviews-loading" id="reviews-loading" style="display:none;">
+          <div class="loading-spinner"></div>
+          <p class="loading-text">口コミを読み込み中...🌱</p>
+        </div>
+
+        <!-- レビューグリッド -->
+        <div class="reviews-grid" id="reviews-grid"></div>
+
+        <!-- レビューがないとき -->
+        <div class="empty-state" id="empty-state" style="display:none;">
+          <div class="empty-icon">🌸</div>
+          <p class="empty-text">まだレビューがありません<br />最初の口コミを書いてみよう！</p>
+          <a href="#form-section" class="btn btn--primary" id="empty-write-btn">🍉 レビューを書く</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- レビュー投稿フォームセクション -->
+    <section class="form-section" id="form-section">
+      <div class="form-wrap">
+        <div class="form-head">
+          <div class="section-badge">✏️ 投稿する</div>
+          <h2 class="section-title">口コミを書いてみよう！</h2>
+          <p class="section-sub">
+            おやつの正直な感想を教えてね🌷<br />
+            「苦手」でも大歓迎。どんな人が好きそうか教えてもらえると嬉しいな！
+          </p>
+        </div>
+
+        <form class="review-form" id="review-form" novalidate>
+
+          <!-- ステップ1: 感情 -->
+          <div class="form-card form-step" id="step-1">
+            <div class="form-card-head">
+              <span class="step-badge">🌿</span>
+              <span class="step-label">このおやつ、どうだった？</span>
+            </div>
+            <div class="feeling-grid" id="feeling-grid">
+              <label class="feeling-option" for="feeling-like">
+                <input type="radio" name="feeling" id="feeling-like" value="like" required />
+                <div class="feeling-card">
+                  <span class="feeling-emoji">🍍</span>
+                  <span class="feeling-text">好き！</span>
+                </div>
+              </label>
+              <label class="feeling-option" for="feeling-neutral">
+                <input type="radio" name="feeling" id="feeling-neutral" value="neutral" />
+                <div class="feeling-card">
+                  <span class="feeling-emoji">🥥</span>
+                  <span class="feeling-text">普通</span>
+                </div>
+              </label>
+              <label class="feeling-option" for="feeling-dislike">
+                <input type="radio" name="feeling" id="feeling-dislike" value="dislike" />
+                <div class="feeling-card">
+                  <span class="feeling-emoji">🌿</span>
+                  <span class="feeling-text">苦手かも</span>
+                </div>
+              </label>
+            </div>
+            <div class="field-error" id="feeling-error" style="display:none;">おやつの感想を選んでね！🍍</div>
+          </div>
+
+          <!-- ステップ2: 口コミ本文 -->
+          <div class="form-card form-step" id="step-2">
+            <div class="form-card-head">
+              <span class="step-badge">🌺</span>
+              <span class="step-label">口コミを書いてね</span>
+            </div>
+            <div class="form-question-box">
+              <p class="form-question">
+                💬 このおやつの口コミを書いてください<br />
+                <span class="question-hint">好きか苦手かだけでなく、具体的に！<br />苦手な人も「どんな人が好きそうか」を書いてもらえると嬉しいな🌟</span>
+              </p>
+            </div>
+            <div class="textarea-wrap">
+              <textarea
+                id="review-text"
+                name="review"
+                class="review-textarea"
+                placeholder="例：思ったより甘さ控えめで食べやすかった！&#10;例：自分には甘すぎたけど、スイーツ好きな人や疲れたときのご褒美に最高だと思う！"
+                rows="6"
+                maxlength="400"
+                required
+              ></textarea>
+              <div class="char-count">
+                <span id="char-count">0</span>/400文字
+              </div>
+            </div>
+            <div class="field-error" id="text-error" style="display:none;">口コミを書いてね！✏️（10文字以上）</div>
+          </div>
+
+          <!-- ステップ3: ニックネーム -->
+          <div class="form-card form-step" id="step-3">
+            <div class="form-card-head">
+              <span class="step-badge">🐚</span>
+              <span class="step-label">ニックネーム（任意）</span>
+            </div>
+            <div class="input-wrap">
+              <input
+                type="text"
+                id="nickname"
+                name="nickname"
+                class="text-input"
+                placeholder="例：甘党な2年生"
+                maxlength="20"
+              />
+              <span class="input-icon">👤</span>
+            </div>
+            <p class="form-note">空欄の場合は「匿名さん」として投稿されます</p>
+            
+            <!-- 公開アナウンス -->
+            <div class="public-notice">
+              <span class="public-notice-icon">📢</span>
+              <p class="public-notice-text">
+                投稿した口コミは、<strong>ニックネームとともにこのページに公開されます</strong>。個人が特定される情報は書かないようにしてね。
+              </p>
+            </div>
+          </div>
+
+          <!-- 送信ボタン -->
+          <div class="form-submit-wrap">
+            <button type="submit" class="btn btn--submit" id="submit-btn">
+              <span class="btn-icon">🌸</span>
+              <span id="submit-btn-text">投稿する！</span>
+              <span class="btn-shimmer"></span>
+            </button>
+          </div>
+        </form>
+
+        <!-- 送信成功メッセージ -->
+        <div class="success-msg" id="success-msg" style="display:none;">
+          <div class="success-icon">🎉</div>
+          <h3 class="success-title">投稿できたよ！</h3>
+          <p class="success-desc">あなたの正直レビュー、届いたよ🌸<br />みんなの参考になるはず！ありがとう♪</p>
+          
+          <!-- フィードバックフォーム（投稿の2秒後に表示） -->
+          <div id="feedback-area" class="feedback-area" style="display:none; opacity: 0; transition: opacity 0.5s ease;">
+            <div class="feedback-divider"></div>
+            <p class="feedback-prompt">🍉 よろしければ、このサイトやイベントの感想（使いやすさなど）も教えてください♪</p>
+            <div class="feedback-form-wrap">
+              <textarea id="feedback-text" class="feedback-textarea" placeholder="例：使いやすくて可愛かったです！もっとお菓子の種類が増えると嬉しいです。" rows="3" maxlength="300"></textarea>
+              <button type="button" class="btn btn--primary" id="submit-feedback-btn">
+                <span>✉️</span> 感想を送信する
+              </button>
+            </div>
+          </div>
+          
+          <!-- フィードバック送信完了メッセージ -->
+          <div id="feedback-success-msg" style="display:none;">
+            <p class="feedback-success-text">🌺 感想を教えてくれてありがとう！</p>
+          </div>
+
+          <div class="success-actions" style="margin-top: 24px;">
+            <button class="btn btn--primary" id="view-reviews-btn">🌺 みんなのレビューを見る</button>
+            <button class="btn btn--secondary" id="write-another-btn">もう一度書く ✏️</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /#review-screen -->
+
+  <!-- 木製の看板、お問い合わせ、砂浜をモチーフにしたフッター -->
+  <footer class="site-footer">
+    <div class="footer-wood-board">
+      <div class="footer-wood-inner">
+        <p class="footer-contact-title">🍂 お問い合わせ</p>
+        <p class="footer-contact-detail">
+          お茶の水女子大学 共創工学部文化情報工学科 講師 土田修平<br>
+          E-mail: tsuchida.shuhei@ocha.ac.jp
+        </p>
+        <p class="footer-lecture-note">
+          ※本イベントは「デザイン思考とロジックモデル」講義の一環として、学生が企画・実施するものです。
+        </p>
+      </div>
+    </div>
+    <div class="footer-sand-beach">
+      <div class="footer-logo">🛒 生協口コミ</div>
+      <p class="footer-copy">© 2026 お茶大生協レビュープロジェクト</p>
+    </div>
+  </footer>
+
+  <script src="review.js"></script>
+</body>
+</html>

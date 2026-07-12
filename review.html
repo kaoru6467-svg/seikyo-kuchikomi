@@ -32,6 +32,7 @@
       </button>
       <nav class="header-nav" id="header-nav" style="display:none;">
         <button class="nav-link" id="back-to-select-btn">← お店に戻る</button>
+        <a href="#site-feedback-section" class="nav-link">📝 アンケート</a>
         <a href="#form-section" class="nav-link nav-link--cta" id="write-review-btn">🍉 レビューを書く</a>
       </nav>
     </div>
@@ -51,7 +52,7 @@
               あつまれ<span class="title-colorful"><span class="c-mi">み</span><span class="c-n">ん</span><span class="c-na">な</span><span class="c-no">の</span></span>正直レビュー
             </h1>
             <p class="select-hero-desc">
-              南国の売店へようこそ！ドリンクの感想をみんなで交換しよう🌴<br>
+              南国の売店へようこそ！お菓子の感想をみんなで交換しよう🌴<br>
               まずは、レビューしたい飲み物を選んでね♪
             </p>
           </div>
@@ -294,27 +295,92 @@
           <h3 class="success-title">投稿できたよ！</h3>
           <p class="success-desc">あなたの正直レビュー、届いたよ🌸<br />みんなの参考になるはず！ありがとう♪</p>
           
-          <!-- フィードバックフォーム（投稿の2秒後に表示） -->
+          <!-- フィードバックへの誘導（投稿の2秒後に表示） -->
           <div id="feedback-area" class="feedback-area" style="display:none; opacity: 0; transition: opacity 0.5s ease;">
             <div class="feedback-divider"></div>
-            <p class="feedback-prompt">🍉 よろしければ、このサイトやイベントの感想（使いやすさなど）も教えてください♪</p>
-            <div class="feedback-form-wrap">
-              <textarea id="feedback-text" class="feedback-textarea" placeholder="例：使いやすくて可愛かったです！もっとお菓子の種類が増えると嬉しいです。" rows="3" maxlength="300"></textarea>
-              <button type="button" class="btn btn--primary" id="submit-feedback-btn">
-                <span>✉️</span> 感想を送信する
-              </button>
-            </div>
-          </div>
-          
-          <!-- フィードバック送信完了メッセージ -->
-          <div id="feedback-success-msg" style="display:none;">
-            <p class="feedback-success-text">🌺 感想を教えてくれてありがとう！</p>
+            <p class="feedback-prompt">🍉 よろしければ、このサイトの感想も聞かせてください！生協店内のシール投票と合わせて参考にします♪</p>
+            <a href="#site-feedback-section" class="btn btn--primary" id="go-to-feedback-btn">
+              <span>✉️</span> アンケートに答える
+            </a>
           </div>
 
           <div class="success-actions" style="margin-top: 24px;">
             <button class="btn btn--primary" id="view-reviews-btn">🌺 みんなのレビューを見る</button>
             <button class="btn btn--secondary" id="write-another-btn">もう一度書く ✏️</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== サイト全体アンケート（誰でも回答OK） ===== -->
+    <section class="site-feedback-section" id="site-feedback-section">
+      <div class="section-wrap">
+        <div class="section-head">
+          <div class="section-badge">📝 アンケート</div>
+          <h2 class="section-title">サイトの感想を聞かせてください</h2>
+          <p class="section-sub">口コミを書いた人も、読むだけの人も大歓迎！生協店内のシール投票とあわせて集計します🌴</p>
+        </div>
+
+        <form id="feedback-survey-form" class="feedback-survey" novalidate>
+
+          <div class="survey-q">
+            <p class="survey-q-title">Q1. このサイトは商品選びの参考になりましたか？</p>
+            <div class="survey-options">
+              <label class="survey-radio"><input type="radio" name="q1" value="とても参考になった" required /><span>とても参考になった</span></label>
+              <label class="survey-radio"><input type="radio" name="q1" value="参考になった" /><span>参考になった</span></label>
+              <label class="survey-radio"><input type="radio" name="q1" value="あまり参考にならなかった" /><span>あまり参考にならなかった</span></label>
+              <label class="survey-radio"><input type="radio" name="q1" value="参考にならなかった" /><span>参考にならなかった</span></label>
+            </div>
+          </div>
+
+          <div class="survey-q">
+            <p class="survey-q-title">Q2. 一番参考になった情報は？</p>
+            <div class="survey-options">
+              <label class="survey-radio"><input type="radio" name="q2" value="味マップ（2軸）" /><span>味マップ（2軸）</span></label>
+              <label class="survey-radio"><input type="radio" name="q2" value="人気投票" /><span>人気投票</span></label>
+              <label class="survey-radio"><input type="radio" name="q2" value="レビューコメント" /><span>レビューコメント</span></label>
+              <label class="survey-radio"><input type="radio" name="q2" value="星評価" /><span>星評価</span></label>
+              <label class="survey-radio"><input type="radio" name="q2" value="その他" /><span>その他</span></label>
+            </div>
+          </div>
+
+          <div class="survey-q">
+            <p class="survey-q-title">Q3. この商品を飲んでみたいと思いましたか？</p>
+            <div class="survey-options">
+              <label class="survey-radio"><input type="radio" name="q3" value="とても思った" /><span>とても思った</span></label>
+              <label class="survey-radio"><input type="radio" name="q3" value="少し思った" /><span>少し思った</span></label>
+              <label class="survey-radio"><input type="radio" name="q3" value="変わらない" /><span>変わらない</span></label>
+              <label class="survey-radio"><input type="radio" name="q3" value="あまり思わない" /><span>あまり思わない</span></label>
+            </div>
+          </div>
+
+          <div class="survey-q">
+            <p class="survey-q-title">Q4. サイトは見やすかったですか？</p>
+            <div class="star-rating" id="star-rating" data-value="0">
+              <button type="button" class="star-btn" data-star="1" aria-label="星1">★</button>
+              <button type="button" class="star-btn" data-star="2" aria-label="星2">★</button>
+              <button type="button" class="star-btn" data-star="3" aria-label="星3">★</button>
+              <button type="button" class="star-btn" data-star="4" aria-label="星4">★</button>
+              <button type="button" class="star-btn" data-star="5" aria-label="星5">★</button>
+            </div>
+          </div>
+
+          <div class="survey-q">
+            <p class="survey-q-title">Q5. 自由記述（任意）</p>
+            <div class="feedback-form-wrap">
+              <textarea id="feedback-text" class="feedback-textarea" placeholder="改善点や感想があれば教えてください" rows="3" maxlength="300"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn--primary" id="submit-feedback-btn">
+            <span>✉️</span> 送信する
+          </button>
+        </form>
+
+        <!-- フィードバック送信完了メッセージ -->
+        <div id="feedback-success-msg" style="display:none;">
+          <div class="success-icon">🌺</div>
+          <p class="feedback-success-text">感想を教えてくれてありがとう！</p>
         </div>
       </div>
     </section>
@@ -340,6 +406,22 @@
       <p class="footer-copy">© 2026 お茶大生協レビュープロジェクト</p>
     </div>
   </footer>
+
+  <!-- アンケート ポップアップ（ある程度スクロールしたら中央に表示） -->
+  <div class="feedback-popup-overlay" id="feedback-popup-overlay" style="display:none;">
+    <div class="feedback-popup-card">
+      <button type="button" class="feedback-popup-close" id="feedback-popup-close" aria-label="閉じる">×</button>
+      <div class="feedback-popup-icon">📝</div>
+      <h3 class="feedback-popup-title">サイトの感想を聞かせてください！</h3>
+      <p class="feedback-popup-desc">口コミ、参考になった？1分で終わるアンケートです🌴<br>生協店内のシール投票とあわせて集計します。</p>
+      <div class="feedback-popup-actions">
+        <a href="#site-feedback-section" class="btn btn--primary" id="feedback-popup-cta">
+          <span>✉️</span> アンケートに答える
+        </a>
+        <button type="button" class="feedback-popup-later" id="feedback-popup-later">あとで</button>
+      </div>
+    </div>
+  </div>
 
   <script src="review.js"></script>
 </body>

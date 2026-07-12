@@ -1166,6 +1166,205 @@ body {
 }
 
 /* ============================================
+   ⑨-2 サイト全体アンケート（誰でも回答OK）
+   ============================================ */
+.site-feedback-section {
+  padding: 60px 24px 80px;
+}
+
+.site-feedback-section .section-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.feedback-survey {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background: var(--color-sand);
+  border: 2px dashed var(--color-wood);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+}
+
+.survey-q-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--color-wood);
+  margin-bottom: 12px;
+}
+
+.survey-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.survey-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: white;
+  border: 2px solid var(--color-wood);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-wood);
+  transition: all 0.2s ease;
+}
+
+.survey-radio:hover {
+  background: var(--color-wood-light);
+}
+
+.survey-radio input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-flower);
+  flex-shrink: 0;
+}
+
+.survey-radio:has(input:checked) {
+  background: var(--color-flower);
+  border-color: var(--color-wood);
+  color: white;
+}
+
+.star-rating {
+  display: flex;
+  gap: 6px;
+}
+
+.star-btn {
+  font-size: 2rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: var(--color-wood-light);
+  -webkit-text-stroke: 1.5px var(--color-wood);
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.15s ease;
+  padding: 0;
+}
+
+.star-btn:hover {
+  transform: scale(1.15);
+}
+
+.star-btn.filled {
+  color: #FEC200;
+}
+
+/* ============================================
+   ⑨-3 アンケート ポップアップ（中央モーダル）
+   ============================================ */
+.feedback-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(93, 64, 55, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: popup-fade-in 0.3s ease;
+}
+
+@keyframes popup-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes popup-pop-in {
+  from { opacity: 0; transform: scale(0.9) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.feedback-popup-card {
+  position: relative;
+  background: var(--color-sand);
+  border: 2px solid var(--color-wood);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+  max-width: 400px;
+  width: 100%;
+  padding: 32px 28px 28px;
+  text-align: center;
+  animation: popup-pop-in 0.35s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.feedback-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-wood);
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.feedback-popup-close:hover {
+  opacity: 1;
+}
+
+.feedback-popup-icon {
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+}
+
+.feedback-popup-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--color-wood);
+  margin-bottom: 10px;
+}
+
+.feedback-popup-desc {
+  font-size: 0.85rem;
+  color: var(--color-wood);
+  opacity: 0.85;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.feedback-popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+#feedback-popup-cta {
+  width: 100%;
+  max-width: 260px;
+}
+
+.feedback-popup-later {
+  background: none;
+  border: none;
+  color: var(--color-wood);
+  opacity: 0.65;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px;
+}
+
+.feedback-popup-later:hover {
+  opacity: 1;
+}
+
+/* ============================================
    レスポンシブ対応
    ============================================ */
 @media (max-width: 768px) {

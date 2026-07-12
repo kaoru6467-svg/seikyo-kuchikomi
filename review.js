@@ -23,7 +23,7 @@ const PRODUCTS = [
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
     ribbonText: 'シール投票中',
-    imgZoom: 1.0,
+    imgZoom: 1.55,
   },
   {
     id:    'product-b',
@@ -36,7 +36,7 @@ const PRODUCTS = [
     theme: 'orange',
     tag:   '🛍️ 南国気分',
     ribbonText: 'シール投票中',
-    imgZoom: 1.0,
+    imgZoom: 1.25,
   },
   {
     id:    'product-c',
@@ -553,11 +553,145 @@ form?.addEventListener('submit', async (e) => {
   document.querySelector('[data-filter="all"]').classList.add('active');
 });
 
-// フィードバックの送信処理
-document.getElementById('submit-feedback-btn')?.addEventListener('click', async () => {
-  const fTextarea = document.getElementById('feedback-text');
-  const fText = fTextarea ? fTextarea.value.trim() : '';
-  if (!fText) return;
+// ============================================
+// ★ アンケート ポップアップ（ある程度スクロールしたら中央表示） ★
+// ============================================
+(function setupFeedbackPopup() {
+  const overlay = document.getElementById('feedback-popup-overlay');
+  if (!overlay) return;
+
+  const DISMISS_KEY = 'feedback_popup_dismissed';
+  const closeBtn = document.getElementById('feedback-popup-close');
+  const laterBtn = document.getElementById('feedback-popup-later');
+  const ctaBtn = document.getElementById('feedback-popup-cta');
+
+  function alreadyDismissed() {
+    try {
+      return localStorage.getItem(DISMISS_KEY) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markDismissed() {
+    try {
+      localStorage.setItem(DISMISS_KEY, '1');
+    } catch (e) { /* noop */ }
+  }
+
+  function showPopup() {
+    if (alreadyDismissed()) return;
+    overlay.style.display = 'flex';
+  }
+
+  function hidePopup() {
+    overlay.style.display = 'none';
+  }
+
+  closeBtn?.addEventListener('click', () => {
+    markDismissed();
+    hidePopup();
+  });
+
+  laterBtn?.addEventListener('click', () => {
+    markDismissed();
+    hidePopup();
+  });
+
+  ctaBtn?.addEventListener('click', () => {
+    markDismissed();
+    hidePopup();
+  });
+
+  // 背景クリックでも閉じる
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      hidePopup();
+    }
+  });
+
+  // ある程度スクロールしたら1回だけ表示
+  let popupShown = false;
+  window.addEventListener('scroll', () => {
+    if (popupShown || alreadyDismissed()) return;
+    // レビュー選択画面(display:none)の時は発火させない
+    if (reviewScreen && reviewScreen.style.display === 'none') return;
+
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) return;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+
+    if (scrollPercent > 50) {
+      popupShown = true;
+      showPopup();
+    }
+  }, { passive: true });
+})();
+
+// ============================================
+// ★ サイト全体アンケート（Q1〜Q5） ★
+// ============================================
+
+// 星評価ウィジェット
+const starRating = document.getElementById('star-rating');
+if (starRating) {
+  const starBtns = starRating.querySelectorAll('.star-btn');
+  starBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const value = Number(btn.dataset.star);
+      starRating.dataset.value = String(value);
+      starBtns.forEach(b => {
+        b.classList.toggle('filled', Number(b.dataset.star) <= value);
+      });
+    });
+  });
+}
+
+/**
+ * アンケート回答をGAS(スプレッドシート)へ送信する
+ * ※通常の口コミ(reviews)とは別データとして type:'feedback' を付けて送る
+ */
+async function submitFeedbackSurvey(answers) {
+  // ローカルにも一応バックアップ保存
+  try {
+    const raw = localStorage.getItem('feedback_surveys');
+    const list = raw ? JSON.parse(raw) : [];
+    list.unshift(answers);
+    localStorage.setItem('feedback_surveys', JSON.stringify(list));
+  } catch (e) { /* noop */ }
+
+  if (!GAS_API_URL) return true;
+
+  try {
+    await fetch(GAS_API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(answers)
+    });
+    return true;
+  } catch (error) {
+    console.error("GASへの送信に失敗しました（ローカルのみ保存）:", error);
+    return false;
+  }
+}
+
+// フィードバックアンケートの送信処理
+document.getElementById('feedback-survey-form')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const surveyForm = e.target;
+
+  const q1 = surveyForm.querySelector('input[name="q1"]:checked')?.value || '';
+  if (!q1) {
+    surveyForm.querySelector('input[name="q1"]')?.closest('.survey-q')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const q2 = surveyForm.querySelector('input[name="q2"]:checked')?.value || '';
+  const q3 = surveyForm.querySelector('input[name="q3"]:checked')?.value || '';
+  const q4 = starRating ? Number(starRating.dataset.value || 0) : 0;
+  const q5 = document.getElementById('feedback-text')?.value.trim() || '';
 
   const fSubmitBtn = document.getElementById('submit-feedback-btn');
   if (fSubmitBtn) {
@@ -565,30 +699,26 @@ document.getElementById('submit-feedback-btn')?.addEventListener('click', async 
     fSubmitBtn.innerHTML = '<span>送信中...</span>';
   }
 
-  // GASやLocalStorageへ送信 (productId: 'feedback')
-  await addReview({
+  await submitFeedbackSurvey({
     id:        `feedback-${Date.now()}`,
     productId: 'feedback',
-    feeling:   'neutral',
-    text:      fText,
-    nickname:  'フィードバック送信者',
+    type:      'feedback',
+    q1, q2, q3, q4, q5,
     date:      new Date().toISOString().split('T')[0]
   });
 
-  const feedbackArea = document.getElementById('feedback-area');
-  const feedbackSuccess = document.getElementById('feedback-success-msg');
+  try { localStorage.setItem('feedback_popup_dismissed', '1'); } catch (e) { /* noop */ }
 
-  if (feedbackArea) {
-    feedbackArea.style.display = 'none';
-  }
+  surveyForm.style.display = 'none';
+  const feedbackSuccess = document.getElementById('feedback-success-msg');
   if (feedbackSuccess) {
     feedbackSuccess.style.display = 'block';
+    feedbackSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  if (fTextarea) fTextarea.value = '';
   if (fSubmitBtn) {
     fSubmitBtn.disabled = false;
-    fSubmitBtn.innerHTML = '<span>✉️ 感想を送信する</span>';
+    fSubmitBtn.innerHTML = '<span>✉️</span> 送信する';
   }
 });
 

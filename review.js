@@ -22,6 +22,7 @@ const PRODUCTS = [
     color: '#FF7B8A',    // アクセント（花）
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
+    ribbonText: 'シール投票中',
   },
   {
     id:    'product-b',
@@ -33,6 +34,40 @@ const PRODUCTS = [
     color: '#F2A649',    // アクセント（南国オレンジ）
     theme: 'orange',
     tag:   '🛍️ 南国気分',
+    ribbonText: 'シール投票中',
+  },
+  {
+    id:    'product-c',
+    label: '商品C',
+    name:  '綾鷹カフェ グリーンティーレモネード',
+    sub:   '緑茶の香りとレモンの爽やかさが香る新感覚レモネード',
+    emoji: '🍋',
+    image: 'product_greentealemonade.png',
+    color: '#B4CB3C',    // 緑茶グリーン
+    theme: 'green',
+    tag:   '🛍️ さっぱり系',
+  },
+  {
+    id:    'product-d',
+    label: '商品D',
+    name:  '午後の紅茶 Summer パッションフルーツ香るレモンティー',
+    sub:   '夏季限定、パッションフルーツ香るレモンティー',
+    emoji: '🍹',
+    image: 'product_gogonokoucha_summer.png',
+    color: '#FFC72C',    // トロピカルイエロー
+    theme: 'blue',
+    tag:   '🛍️ 夏季限定',
+  },
+  {
+    id:    'product-e',
+    label: '商品E',
+    name:  '世界のKitchenから ライムソルト',
+    sub:   'ライム&グレープフルーツ果汁、塩分・水分補給にぴったり',
+    emoji: '🧂',
+    image: 'product_limesalt.png',
+    color: '#7DBE65',    // 葉の緑
+    theme: 'green',
+    tag:   '🛍️ 塩分補給',
   },
 ];
 
@@ -112,7 +147,7 @@ function renderProductGrid() {
     card.innerHTML = `
       <div class="product-card-image-wrap">
         <img src="${product.image}" alt="${escapeHtml(product.name)}" class="product-card-img" />
-        <div class="product-ribbon ribbon-${product.theme}">${product.label}</div>
+        ${product.ribbonText ? `<div class="product-ribbon ribbon-${product.theme}">${escapeHtml(product.ribbonText)}</div>` : ''}
       </div>
       <div class="product-card-body">
         <div class="product-card-tag tag-${product.theme}">${product.tag}</div>

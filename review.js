@@ -23,6 +23,7 @@ const PRODUCTS = [
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
     ribbonText: 'シール投票中',
+    imgZoom: 1.55,
   },
   {
     id:    'product-b',
@@ -35,6 +36,7 @@ const PRODUCTS = [
     theme: 'orange',
     tag:   '🛍️ 南国気分',
     ribbonText: 'シール投票中',
+    imgZoom: 1.9,
   },
   {
     id:    'product-c',
@@ -146,7 +148,7 @@ function renderProductGrid() {
     // 画像デザイン再現（写真 ➔ 商品名 ➔ 人気度/件数）
     card.innerHTML = `
       <div class="product-card-image-wrap">
-        <img src="${product.image}" alt="${escapeHtml(product.name)}" class="product-card-img" />
+        <img src="${product.image}" alt="${escapeHtml(product.name)}" class="product-card-img" style="--img-zoom:${product.imgZoom || 1};" />
         ${product.ribbonText ? `<div class="product-ribbon ribbon-${product.theme}">${escapeHtml(product.ribbonText)}</div>` : ''}
       </div>
       <div class="product-card-body">

@@ -23,7 +23,7 @@ const PRODUCTS = [
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
     ribbonText: 'シール投票中',
-    imgZoom: 1.55,
+    imgZoom: 1.2,
   },
   {
     id:    'product-b',

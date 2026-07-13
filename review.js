@@ -9,6 +9,21 @@
 const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzFu62TvzIMpsL-NZm8Fw5Mz7P0yxyxh7R57xLQnbMTPolqFXhakqoS6UPk8IuHWv9Zrw/exec";
 
 // ============================================
+// ★ 閲覧数の記録（ページを開くたびに1回だけ送信・表示はしない） ★
+// ============================================
+(function recordPageview() {
+  if (!GAS_API_URL) return;
+  try {
+    fetch(GAS_API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'pageview' })
+    }).catch(() => { /* 閲覧数記録に失敗してもサイト動作には影響させない */ });
+  } catch (e) { /* noop */ }
+})();
+
+// ============================================
 // ★ 商品データ ★
 // ============================================
 const PRODUCTS = [
@@ -23,7 +38,7 @@ const PRODUCTS = [
     theme: 'pink',
     tag:   '🛍️ 売店の定番',
     ribbonText: 'シール投票中',
-    imgZoom: 1.0,
+    imgZoom: 1,
   },
   {
     id:    'product-b',
@@ -36,7 +51,7 @@ const PRODUCTS = [
     theme: 'orange',
     tag:   '🛍️ 南国気分',
     ribbonText: 'シール投票中',
-    imgZoom: 1.0,
+    imgZoom: 1,
   },
   {
     id:    'product-c',

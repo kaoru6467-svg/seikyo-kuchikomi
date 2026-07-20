@@ -9,19 +9,22 @@
 const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzFu62TvzIMpsL-NZm8Fw5Mz7P0yxyxh7R57xLQnbMTPolqFXhakqoS6UPk8IuHWv9Zrw/exec";
 
 // ============================================
-// ★ 閲覧数の記録（ページを開くたびに1回だけ送信・表示はしない） ★
+// ★ 閲覧数の記録（ページ/商品ごとに1回だけ送信・表示はしない） ★
 // ============================================
-(function recordPageview() {
+function recordPageview(page) {
   if (!GAS_API_URL) return;
   try {
     fetch(GAS_API_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'pageview' })
+      body: JSON.stringify({ type: 'pageview', page: page || 'unknown' })
     }).catch(() => { /* 閲覧数記録に失敗してもサイト動作には影響させない */ });
   } catch (e) { /* noop */ }
-})();
+}
+
+// 最初に開いた瞬間（お店の入口＝商品選択画面）を1回記録
+recordPageview('product-select');
 
 // ============================================
 // ★ 商品データ ★
@@ -114,6 +117,9 @@ async function showReviewScreen(product) {
   selectScreen.style.display = 'none';
   reviewScreen.style.display = 'block';
   headerNav.style.display    = 'flex';
+
+  // この商品ページが見られた回数として記録
+  recordPageview(product.id);
 
   // 商品情報をバナーとヘッダーに反映
   const bannerBadge = document.getElementById('active-product-badge');
